@@ -10,6 +10,8 @@ Open `index.html` in a browser. For a local server, run `python -m http.server 8
 
 Edit `config.js` and set `whatsappNumber` to the family's WhatsApp number in international format, digits only. Example format: `919876543210`. Do not add `+`, spaces or dashes. The configured family contact is the supplied Indian mobile number, stored in international format as `919400707943`. Because this number is embedded in the public website, guests who visit the site can use it to contact the family.
 
+`whatsappMessage` is the general greeting used by the floating **Text Shayan** button. `whatsappHelpMessage` is used by the **Text Shayan** button in the travel section and should mention directions or the venue.
+
 ## Publish free with GitHub Pages
 
 1. Create a public GitHub repository, for example `shayan-kavya-invitation`.
@@ -21,12 +23,15 @@ Netlify alternative: create a free account, then drag this folder into Netlify's
 
 ## Venue map and travel time
 
-The "Find your way to us" section shows an embedded Google map of Sooraj Auditorium and a **Use my location** button.
+The "Find your way to us" section gives guests several ways to find the venue:
 
-- Location access is requested only after the guest taps the button.
-- With permission, the browser sends the guest's coordinates to the public OSRM routing service to estimate driving distance and time. The page then updates the map and the Google Maps directions link. Nothing is stored by the site.
-- Without permission, or if the route service is unavailable, guests still see the map, the full address, and written directions by train, air and road.
-- Drive times are estimates only and do not account for live traffic. The directions link opens Google Maps for turn-by-turn guidance.
+- An embedded Google map, the full address, and links to Google Maps and Apple Maps.
+- **Use my location** asks for permission only when tapped. With permission, the browser sends the guest's coordinates to the public OSRM routing service to estimate driving distance and time. The page then updates the route map and the directions links. Nothing is stored by the site.
+- **Copy address** copies the full venue address for pasting into Uber, Ola or another maps app.
+- **Add to calendar** downloads a `.ics` event for Sunday, 13 December 2026, 11:00 AM–12:00 PM IST.
+- One-tap route links from Koyilandy railway station (walking), Calicut International Airport (driving) and Kozhikode city (driving).
+- Written directions by train, air and road remain visible even if location access or the routing service is unavailable.
+- Drive times are estimates only and do not account for live traffic. The directions links open Google Maps, Apple Maps or the guest's maps app for live, turn-by-turn guidance.
 
 ## Countdown
 

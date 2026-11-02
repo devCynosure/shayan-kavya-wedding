@@ -1,14 +1,19 @@
 (() => {
-  const link = document.getElementById('whatsapp-link');
   const config = window.INVITATION_CONFIG || {};
   const number = String(config.whatsappNumber || '').replace(/\D/g, '');
   const message = config.whatsappMessage || "Hello! We're looking forward to celebrating with Shayan and Kavya.";
-  if (number) {
-    link.href = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
-  } else {
-    link.href = `https://wa.me/?text=${encodeURIComponent(message)}`;
-    link.title = 'Add the family WhatsApp number in config.js to direct guests to the right contact.';
+  const helpMessage = config.whatsappHelpMessage || 'Hi Shayan, I need help finding Sooraj Auditorium.';
+  const whatsappUrl = text => `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
+
+  const link = document.getElementById('whatsapp-link');
+  const helpLink = document.getElementById('travel-whatsapp');
+  if (link) {
+    link.href = whatsappUrl(message);
+    if (!number) {
+      link.title = 'Add the family WhatsApp number in config.js to direct guests to the right contact.';
+    }
   }
+  if (helpLink) helpLink.href = whatsappUrl(helpMessage);
 })();
 
 (() => {
@@ -47,6 +52,7 @@
 
 (() => {
   const VENUE = { lat: 11.442457, lng: 75.691581 };
+  const ADDRESS = 'Sooraj Auditorium, 26/169-D, Mubarak Road, Koyilandy, Panthalayini, Kozhikode, Kerala 673305';
   const button = document.getElementById('locate-button');
   const statusEl = document.getElementById('route-status');
   const resultEl = document.getElementById('route-result');
@@ -54,11 +60,28 @@
   const durationEl = document.getElementById('route-duration');
   const mapEl = document.getElementById('venue-map');
   const directionsEl = document.getElementById('directions-link');
+  const appleEl = document.getElementById('apple-link');
+  const routeOpenEl = document.getElementById('route-open');
+  const copyButton = document.getElementById('copy-address');
+  const calendarButton = document.getElementById('add-calendar');
   if (!button || !statusEl || !resultEl) return;
 
   const directionsUrl = origin =>
     `https://www.google.com/maps/dir/?api=1${origin ? `&origin=${origin.lat},${origin.lng}` : ''}` +
     `&destination=${VENUE.lat},${VENUE.lng}&travelmode=driving`;
+
+  const appleUrl = origin =>
+    `https://maps.apple.com/?${origin ? `saddr=${origin.lat},${origin.lng}&` : ''}` +
+    `daddr=${VENUE.lat},${VENUE.lng}&dirflg=d`;
+
+  const applyOrigin = origin => {
+    const google = directionsUrl(origin);
+    directionsEl.href = google;
+    if (appleEl) appleEl.href = appleUrl(origin);
+    if (routeOpenEl) routeOpenEl.href = google;
+  };
+
+  applyOrigin(null);
 
   const setStatus = (text, state) => {
     statusEl.textContent = text;
@@ -103,7 +126,7 @@
     distanceEl.textContent = formatDistance(route.distance);
     durationEl.textContent = formatDuration(route.duration);
     resultEl.hidden = false;
-    directionsEl.href = directionsUrl(position);
+    applyOrigin(position);
     if (mapEl) {
       mapEl.src =
         `https://maps.google.com/maps?saddr=${position.lat},${position.lng}` +
@@ -118,13 +141,13 @@
       const route = await requestRoute(origin.lat, origin.lng);
       showRoute(origin, route);
       setStatus(
-        'Estimated driving time from your location. Open Google Maps for live traffic and turn-by-turn directions.',
+        'Estimated driving time from your location. Open the route for live traffic and turn-by-turn directions.',
         'success'
       );
     } catch (error) {
-      directionsEl.href = directionsUrl(origin);
+      applyOrigin(origin);
       setStatus(
-        'We couldn’t estimate the drive time right now. Use the directions link for live guidance.',
+        'We couldn’t estimate the drive time right now. Use the directions links for live guidance.',
         'error'
       );
     } finally {
@@ -141,6 +164,101 @@
     setStatus(messages[error.code] || messages[2], 'error');
     button.disabled = false;
   };
+
+  const copyText = async text => {
+    if (navigator.clipboard && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return;
+      } catch (error) {
+        // Fall through to the legacy path when clipboard permission is unavailable.
+      }
+    }
+    const area = document.createElement('textarea');
+    area.value = text;
+    area.setAttribute('readonly', '');
+    area.style.cssText = 'position:fixed;left:-9999px;top:0;opacity:0';
+    document.body.appendChild(area);
+    area.select();
+    const copied = document.execCommand('copy');
+    area.remove();
+    if (!copied) throw new Error('Copy failed');
+  };
+
+  const flashButton = (el, text) => {
+    if (!el.dataset.label) el.dataset.label = el.textContent;
+    el.textContent = text;
+    el.disabled = true;
+    setTimeout(() => {
+      el.textContent = el.dataset.label;
+      el.disabled = false;
+    }, 2200);
+  };
+
+  if (copyButton) {
+    copyButton.addEventListener('click', async () => {
+      try {
+        await copyText(ADDRESS);
+        flashButton(copyButton, 'Address copied ✓');
+      } catch (error) {
+        flashButton(copyButton, 'Copy failed');
+      }
+    });
+  }
+
+  const icsEscape = value =>
+    String(value).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
+
+  const foldLine = line => {
+    const bytes = new TextEncoder().encode(line);
+    if (bytes.length <= 75) return line;
+    const decoder = new TextDecoder();
+    const chunks = [];
+    let start = 0;
+    while (start < bytes.length) {
+      let end = Math.min(start + 73, bytes.length);
+      while (end < bytes.length && (bytes[end] & 0xC0) === 0x80) end--;
+      chunks.push(decoder.decode(bytes.slice(start, end)));
+      start = end;
+    }
+    return chunks.join('\r\n ');
+  };
+
+  const calendarFile = () => {
+    const stamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+    return [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Shayan and Kavya//Wedding//EN',
+      'CALSCALE:GREGORIAN',
+      'METHOD:PUBLISH',
+      'BEGIN:VEVENT',
+      'UID:shayan-kavya-wedding-20261213@shayan-kavya',
+      `DTSTAMP:${stamp}`,
+      'DTSTART:20261213T053000Z',
+      'DTEND:20261213T063000Z',
+      'SUMMARY:Shayan & Kavya — Wedding',
+      `LOCATION:${icsEscape(ADDRESS)}`,
+      'DESCRIPTION:Wedding of Shayan Prakash and Kavya Das. With love and blessings\\, both families.',
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].map(foldLine).join('\r\n');
+  };
+
+  if (calendarButton) {
+    calendarButton.addEventListener('click', () => {
+      const blob = new Blob([calendarFile()], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const download = document.createElement('a');
+      download.href = url;
+      download.download = 'shayan-kavya-wedding.ics';
+      document.body.appendChild(download);
+      download.click();
+      download.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1500);
+      flashButton(calendarButton, 'Calendar saved ✓');
+    });
+  }
 
   if (!navigator.geolocation) {
     button.disabled = true;
