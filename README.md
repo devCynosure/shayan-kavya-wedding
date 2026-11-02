@@ -37,6 +37,18 @@ The "Find your way to us" section gives guests several ways to find the venue:
 
 The countdown targets **11:00 AM IST on Sunday, 13 December 2026** (`2026-12-13T11:00:00+05:30`). Update the date in `index.html` (hero, details card and `<time>` element) and the target constant at the top of the countdown block in `script.js` if it changes.
 
+## Scrolling and interaction
+
+The page adds a light interaction layer on top of the invitation content:
+
+- A sticky, softly blurred header with active-section highlighting and a **Share** button. Sharing uses the browser's native share sheet when available and falls back to copying the page link.
+- A gold scroll-progress bar, plus a floating back-to-top button once the guest has scrolled down.
+- Sections and cards fade or rise into view as they enter the viewport. Cards also respond on hover and touch.
+- Hero buttons for **Find your way** and **Add to calendar**, and a gentle pointer parallax on the decorative flowers.
+- A soft shower of petals follows each tap and drag, drawn on a transparent canvas above the page but below the controls.
+- A skip link, visible keyboard focus styles, and a live region for route status messages.
+- All movement is disabled automatically when the guest's device requests reduced motion.
+
 ## Important content verification notes
 
 - Groom name is **Shayan Prakash**. Bride name is **Kavya Das**.
