@@ -2,7 +2,7 @@
   const link = document.getElementById('whatsapp-link');
   const config = window.INVITATION_CONFIG || {};
   const number = String(config.whatsappNumber || '').replace(/\D/g, '');
-  const message = config.whatsappMessage || "Hello! I have a question regarding Shayan and Kavya's wedding invitation.";
+  const message = config.whatsappMessage || "Hello! We're looking forward to celebrating with Shayan and Kavya.";
   if (number) {
     link.href = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
   } else {
