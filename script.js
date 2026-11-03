@@ -144,6 +144,16 @@
       return;
     }
     const totalSeconds = Math.floor(remaining / 1000);
+    if (kicker) {
+      const days = remaining / 86400000;
+      const label =
+        days <= 1
+          ? 'THE CELEBRATION BEGINS TOMORROW'
+          : days <= 7
+            ? 'THE FINAL WEEK · COUNTING DOWN'
+            : 'COUNTING DOWN TO THE CELEBRATION';
+      if (kicker.textContent !== label) kicker.textContent = label;
+    }
     const seconds = pad(totalSeconds % 60);
     parts.days.textContent = pad(Math.floor(totalSeconds / 86400));
     parts.hours.textContent = pad(Math.floor((totalSeconds % 86400) / 3600));

@@ -13,16 +13,27 @@
 .wa-copy b{display:block;font-weight:600;color:var(--ink);font-size:12.5px;transition:color .2s}
 .whatsapp:hover .wa-copy b{color:var(--gold)}@media(max-width:650px){.topbar{height:64px}.hero{min-height:calc(100svh - 64px);padding:65px 0 80px}.hero h1{letter-spacing:-2.5px}.hero-flower{font-size:90px}.flower-one{left:-27px}.flower-two{right:-28px;font-size:85px}.details{padding:78px 0}.detail-grid{grid-template-columns:1fr;gap:12px;margin-top:35px}.detail-card{min-height:0;padding:30px 18px}.family-note{gap:10px;flex-wrap:wrap}.family-note p{width:100%;margin:0}.original{grid-template-columns:1fr;gap:34px;padding:70px 0}.original-copy{text-align:center}.original-copy .section-copy{margin:0 auto}.invite-photo{width:min(78%,300px)}.closing{padding:68px 0 82px}footer{gap:10px;flex-wrap:wrap;justify-content:center;text-align:center}footer span{flex:1 1 28%}.whatsapp{right:13px;bottom:13px;padding:9px 13px 9px 9px}}
 
-.countdown-band{padding:34px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(255,253,249,.75),rgba(248,245,239,0))}
-.countdown-inner{display:flex;flex-direction:column;align-items:center;gap:15px;text-align:center}
-.countdown-kicker{font-size:9px;letter-spacing:2px;font-weight:600;color:var(--gold);margin:0}
-.countdown{display:flex;align-items:flex-start;gap:14px}
-.countdown-unit{display:flex;flex-direction:column;align-items:center;min-width:64px}
-.countdown-unit span{font-family:'Playfair Display',serif;font-size:clamp(30px,5vw,44px);line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
-.countdown-unit small{font-size:8px;letter-spacing:1.6px;color:var(--muted);margin-top:8px;font-weight:600}
-.countdown-colon{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,34px);line-height:1;color:var(--gold);opacity:.55;margin-top:2px}
-.countdown-date{margin:0;color:var(--muted);font-size:11px;letter-spacing:.4px}
-.countdown.is-complete .countdown-unit span{color:var(--gold)}
+.countdown-band{padding:54px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:relative;background:radial-gradient(70% 130% at 50% 0%,rgba(216,195,165,.2),transparent 70%),linear-gradient(180deg,#fbf7f0,#f6f0e6)}
+.countdown-band::before{content:'';position:absolute;inset:9px 0;border-top:1px solid rgba(169,135,80,.14);border-bottom:1px solid rgba(169,135,80,.14);pointer-events:none}
+.countdown-inner{display:flex;justify-content:center;text-align:center;position:relative}
+.countdown-card{position:relative;width:100%;max-width:760px;padding:30px clamp(16px,4vw,44px) 28px;background:radial-gradient(120% 150% at 50% 0%,rgba(255,253,249,.92),rgba(248,245,239,0) 62%),linear-gradient(180deg,rgba(255,253,249,.6),rgba(248,245,239,0));border:1px solid rgba(169,135,80,.26);box-shadow:0 24px 60px rgba(48,44,38,.05)}
+.countdown-card::before{content:'';position:absolute;inset:7px;border:1px solid rgba(169,135,80,.14);pointer-events:none}
+.countdown-ornament{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--gold);margin-bottom:12px}
+.countdown-ornament span{width:46px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.countdown-ornament span:last-child{background:linear-gradient(90deg,var(--gold),transparent)}
+.countdown-ornament i{font-style:normal;font-size:9px;line-height:1;opacity:.9}
+.countdown-kicker{font-size:9px;letter-spacing:2.6px;font-weight:600;color:var(--gold);margin:0}
+.countdown{display:flex;align-items:stretch;justify-content:center;gap:clamp(8px,1.6vw,14px);max-width:600px;margin:22px auto 0}
+.countdown-unit{position:relative;flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 6px 16px;background:linear-gradient(180deg,rgba(255,253,249,.96),rgba(247,241,230,.92));border:1px solid rgba(169,135,80,.28);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 10px 24px rgba(48,44,38,.05);transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
+.countdown-unit::before{content:'';position:absolute;top:0;left:50%;width:30px;height:1px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.countdown-unit:hover{transform:translateY(-3px);border-color:rgba(169,135,80,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 16px 30px rgba(48,44,38,.08)}
+.countdown-value{display:block;font-family:'Playfair Display',serif;font-size:clamp(36px,5.4vw,52px);line-height:1;letter-spacing:-1px;color:var(--ink);font-variant-numeric:tabular-nums;text-shadow:0 1px 0 rgba(255,255,255,.6)}
+.countdown-unit small{font-size:7.5px;letter-spacing:2.2px;color:var(--gold);margin-top:10px;font-weight:600}
+.countdown-sep{position:relative;flex:0 0 auto;align-self:center;width:5px;height:5px;transform:rotate(45deg);background:rgba(169,135,80,.5);box-shadow:0 0 0 3px rgba(169,135,80,.08)}
+.countdown-unit--seconds::after{content:'';position:absolute;left:22%;right:22%;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:secondSweep 1s ease-in-out infinite}
+@keyframes secondSweep{0%,100%{opacity:.25;transform:scaleX(.55)}50%{opacity:1;transform:scaleX(1)}}
+.countdown-date{display:inline-block;margin:22px 0 0;padding:9px 18px;border:1px solid rgba(169,135,80,.26);border-radius:999px;background:rgba(255,253,249,.72);color:var(--muted);font-size:9.5px;letter-spacing:1.4px;text-transform:uppercase}
+.countdown.is-complete .countdown-value{color:var(--gold)}
 .travel{padding:100px 0;border-top:1px solid var(--line);text-align:center}
 .travel-heading .section-copy{max-width:520px}
 .travel-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;margin-top:46px;text-align:left;align-items:stretch}
@@ -85,11 +96,14 @@
 .placeholder-mark{display:block;color:var(--gold);font-size:22px;margin-bottom:14px}
 .placeholder-kicker{font-size:8px;letter-spacing:1.8px;font-weight:600;color:var(--gold);margin:0 0 10px}
 .placeholder-text{font-family:'Playfair Display',serif;font-size:17px;line-height:1.5;color:var(--muted);margin:0}
-@media(max-width:650px){.countdown-band{padding:28px 0}
-.countdown{gap:8px}
-.countdown-unit{min-width:48px}
-.countdown-unit span{font-size:30px}
-.countdown-colon{font-size:24px}
+@media(max-width:650px){.countdown-band{padding:40px 0}
+.countdown-card{padding:26px 15px 24px}
+.countdown{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-width:330px;margin-top:18px}
+.countdown-sep{display:none}
+.countdown-unit{padding:18px 6px 14px}
+.countdown-value{font-size:42px}
+.countdown-unit small{letter-spacing:1.8px}
+.countdown-date{margin-top:18px;padding:8px 13px;font-size:8px;letter-spacing:.9px}
 .travel{padding:72px 0}
 .travel-grid{grid-template-columns:1fr;gap:14px;margin-top:34px}
 .map-card iframe{min-height:300px}
@@ -170,9 +184,9 @@ main[tabindex="-1"]:focus,section[tabindex="-1"]:focus{outline:none}
 .back-to-top.is-visible{opacity:1;visibility:visible;transform:none}
 .back-to-top:hover,.back-to-top:focus-visible{border-color:var(--gold);color:var(--gold);background:var(--white);transform:translateY(-2px)}
 
-.countdown-unit span{transition:transform .25s,opacity .25s}
-.countdown-unit span.is-ticking{animation:tickPop .3s ease}
-@keyframes tickPop{0%{transform:translateY(-3px);opacity:.55}100%{transform:none;opacity:1}}
+.countdown-value{transition:transform .22s ease,opacity .22s ease,color .3s ease}
+.countdown-value.is-ticking{animation:tickPop .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes tickPop{0%{transform:translateY(-5px) scale(.97);opacity:.35;color:var(--gold)}60%{opacity:1}100%{transform:none;opacity:1;color:var(--ink)}}
 
 .petal-layer{position:fixed;inset:0;z-index:4;display:block;width:100%;height:100%;pointer-events:none}
 
@@ -221,6 +235,6 @@ main[tabindex="-1"]:focus,section[tabindex="-1"]:focus{outline:none}
 @media (prefers-reduced-motion:reduce){
   .js [data-reveal],.js [data-reveal]:not([data-reveal="fade"]){opacity:1;transform:none;transition:none}
   .hero-flower,.flower-two{transform:none}
-  .scroll-progress span,.back-to-top,.topbar,.top-link::after,.top-share::after,.hero-cta,.hero-cta span,.countdown-unit span,.detail-icon{transition:none}
-  .countdown-unit span.is-ticking{animation:none}
+  .scroll-progress span,.back-to-top,.topbar,.top-link::after,.top-share::after,.hero-cta,.hero-cta span,.countdown-value,.countdown-unit,.countdown-unit--seconds::after,.detail-icon{transition:none;animation:none}
+  .countdown-value.is-ticking{animation:none}
 }

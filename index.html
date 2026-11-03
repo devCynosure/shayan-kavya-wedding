@@ -78,17 +78,32 @@
 
     <section class="countdown-band" aria-label="Countdown to the wedding" data-reveal="fade">
       <div class="countdown-inner section-wrap">
-        <p class="countdown-kicker" id="countdown-kicker">COUNTING DOWN TO THE CELEBRATION</p>
-        <div class="countdown" id="countdown">
-          <div class="countdown-unit"><span id="countdown-days">00</span><small>DAYS</small></div>
-          <div class="countdown-colon" aria-hidden="true">:</div>
-          <div class="countdown-unit"><span id="countdown-hours">00</span><small>HOURS</small></div>
-          <div class="countdown-colon" aria-hidden="true">:</div>
-          <div class="countdown-unit"><span id="countdown-minutes">00</span><small>MINUTES</small></div>
-          <div class="countdown-colon" aria-hidden="true">:</div>
-          <div class="countdown-unit"><span id="countdown-seconds">00</span><small>SECONDS</small></div>
+        <div class="countdown-card">
+          <div class="countdown-ornament" aria-hidden="true"><span></span><i>✦</i><span></span></div>
+          <p class="countdown-kicker" id="countdown-kicker">COUNTING DOWN TO THE CELEBRATION</p>
+          <div class="countdown" id="countdown" role="timer" aria-live="off" aria-label="Time remaining until the wedding">
+            <div class="countdown-unit">
+              <span class="countdown-value" id="countdown-days">00</span>
+              <small>DAYS</small>
+            </div>
+            <span class="countdown-sep" aria-hidden="true"></span>
+            <div class="countdown-unit">
+              <span class="countdown-value" id="countdown-hours">00</span>
+              <small>HOURS</small>
+            </div>
+            <span class="countdown-sep" aria-hidden="true"></span>
+            <div class="countdown-unit">
+              <span class="countdown-value" id="countdown-minutes">00</span>
+              <small>MINUTES</small>
+            </div>
+            <span class="countdown-sep" aria-hidden="true"></span>
+            <div class="countdown-unit countdown-unit--seconds">
+              <span class="countdown-value" id="countdown-seconds">00</span>
+              <small>SECONDS</small>
+            </div>
+          </div>
+          <p class="countdown-date"><time id="countdown-date" datetime="2026-12-13T11:00:00+05:30">Sunday, 13 December 2026 · 11:00 AM IST</time></p>
         </div>
-        <p class="countdown-date"><time id="countdown-date" datetime="2026-12-13T11:00:00+05:30">Sunday, 13 December 2026 · 11:00 AM IST</time></p>
       </div>
     </section>
 
