@@ -176,6 +176,7 @@
   const directionsEl = document.getElementById('directions-link');
   const appleEl = document.getElementById('apple-link');
   const routeOpenEl = document.getElementById('route-open');
+  const detailsDirectionsEl = document.getElementById('details-directions');
   const copyButton = document.getElementById('copy-address');
   if (!button || !statusEl || !resultEl) return;
 
@@ -192,6 +193,7 @@
     directionsEl.href = google;
     if (appleEl) appleEl.href = appleUrl(origin);
     if (routeOpenEl) routeOpenEl.href = google;
+    if (detailsDirectionsEl) detailsDirectionsEl.href = google;
   };
 
   applyOrigin(null);

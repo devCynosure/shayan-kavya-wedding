@@ -25,7 +25,7 @@ Netlify alternative: create a free account, then drag this folder into Netlify's
 
 The "Find your way to us" section gives guests several ways to find the venue:
 
-- An embedded Google map, the full address, and links to Google Maps and Apple Maps.
+- An embedded Google map, the full address, and links to Google Maps and Apple Maps. **Get directions** opens turn-by-turn driving directions to the venue, while **Open larger map** opens the venue's Google Maps place page.
 - **Use my location** asks for permission only when tapped. With permission, the browser sends the guest's coordinates to the public OSRM routing service to estimate driving distance and time. The page then updates the route map and the directions links. Nothing is stored by the site.
 - **Copy address** copies the full venue address for pasting into Uber, Ola or another maps app.
 - **Add to calendar** downloads a `.ics` event for Sunday, 13 December 2026, 11:00 AM–12:00 PM IST.
