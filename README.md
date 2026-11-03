@@ -8,9 +8,9 @@ Open `index.html` in a browser. For a local server, run `python -m http.server 8
 
 ## Configure WhatsApp
 
-Edit `config.js` and set `whatsappNumber` to the family's WhatsApp number in international format, digits only. Example format: `919876543210`. Do not add `+`, spaces or dashes. The configured family contact is the supplied Indian mobile number, stored in international format as `919400707943`. Because this number is embedded in the public website, guests who visit the site can use it to contact the family.
+Edit `config.js` and set `whatsappNumber` to the WhatsApp number in international format, digits only. Example format: `919876543210`. Do not add `+`, spaces or dashes. The configured contact is Shayan's brother on +91 94960 44825, stored in international format as `919496044825`. Because this number is embedded in the public website, guests who visit the site can use it to contact him.
 
-`whatsappMessage` is the general greeting used by the floating **Text Shayan** button. `whatsappHelpMessage` is used by the **Text Shayan** button in the travel section and should mention directions or the venue.
+`whatsappMessage` is the general greeting used by the floating **Text Shayan's brother** button. `whatsappHelpMessage` is used by the **Text Shayan's brother** button in the travel section and should mention directions or the venue.
 
 ## Publish free with GitHub Pages
 

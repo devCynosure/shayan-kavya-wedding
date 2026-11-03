@@ -101,7 +101,7 @@
   const config = window.INVITATION_CONFIG || {};
   const number = String(config.whatsappNumber || '').replace(/\D/g, '');
   const message = config.whatsappMessage || "Hello! We're looking forward to celebrating with Shayan and Kavya.";
-  const helpMessage = config.whatsappHelpMessage || 'Hi Shayan, I need help finding Sooraj Auditorium.';
+  const helpMessage = config.whatsappHelpMessage || "Hello! I need help finding Sooraj Auditorium for Shayan and Kavya's wedding.";
   const whatsappUrl = text => `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
 
   const link = document.getElementById('whatsapp-link');
